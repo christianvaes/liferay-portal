@@ -90,8 +90,13 @@ public class WikiPageIndexer extends BaseIndexer {
 		}
 		else if (obj instanceof MBMessage) {
 			MBMessage message = (MBMessage)obj;
-
+			
+			try {
 			page = WikiPageLocalServiceUtil.getPage(message.getClassPK());
+			}
+			catch (Exception e) {
+				return;
+			}
 		}
 
 		document.addKeyword(Field.NODE_ID, page.getNodeId());
